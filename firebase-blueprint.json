@@ -1,0 +1,205 @@
+{
+  "entities": {
+    "College": {
+      "title": "College",
+      "description": "Registered educational institution profile",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "code": { "type": "string" },
+        "principalId": { "type": "string" },
+        "principalName": { "type": "string" },
+        "email": { "type": "string" },
+        "phone": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "code", "principalId"]
+    },
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "User profile with role-based access",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "name": { "type": "string" },
+        "email": { "type": "string" },
+        "role": { "type": "string", "enum": ["STUDENT", "TEACHER", "PRINCIPAL", "HOD", "PARENT", "PLACEMENT_OFFICER", "COMPANY"] },
+        "collegeId": { "type": "string" },
+        "department": { "type": "string" },
+        "rollNumber": { "type": "string" },
+        "phone": { "type": "string" },
+        "linkedStudentId": { "type": "string" },
+        "companyName": { "type": "string" },
+        "status": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "name", "email", "role"]
+    },
+    "AttendanceRecord": {
+      "title": "AttendanceRecord",
+      "description": "Student attendance marking",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "collegeId": { "type": "string" },
+        "department": { "type": "string" },
+        "studentId": { "type": "string" },
+        "studentName": { "type": "string" },
+        "subject": { "type": "string" },
+        "date": { "type": "string" },
+        "status": { "type": "string", "enum": ["PRESENT", "ABSENT", "LATE"] },
+        "markedBy": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["studentId", "subject", "date", "status"]
+    },
+    "AcademicRecord": {
+      "title": "AcademicRecord",
+      "description": "Academic scores, marks and backlogs",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "collegeId": { "type": "string" },
+        "studentId": { "type": "string" },
+        "semester": { "type": "string" },
+        "subject": { "type": "string" },
+        "internalMarks": { "type": "number" },
+        "externalMarks": { "type": "number" },
+        "totalMarks": { "type": "number" },
+        "grade": { "type": "string" },
+        "cgpa": { "type": "number" },
+        "hasBacklog": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["studentId", "semester", "subject"]
+    },
+    "PlacementDrive": {
+      "title": "PlacementDrive",
+      "description": "Campus recruitment drive details",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "collegeId": { "type": "string" },
+        "companyId": { "type": "string" },
+        "companyName": { "type": "string" },
+        "role": { "type": "string" },
+        "packageLpa": { "type": "number" },
+        "minCgpa": { "type": "number" },
+        "allowedDepartments": { "type": "string" },
+        "maxBacklogs": { "type": "number" },
+        "deadline": { "type": "string" },
+        "status": { "type": "string" },
+        "testLink": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["companyName", "role", "packageLpa"]
+    },
+    "PlacementApplication": {
+      "title": "PlacementApplication",
+      "description": "Student placement drive application and status tracker",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "driveId": { "type": "string" },
+        "companyName": { "type": "string" },
+        "role": { "type": "string" },
+        "studentId": { "type": "string" },
+        "studentName": { "type": "string" },
+        "department": { "type": "string" },
+        "cgpa": { "type": "number" },
+        "status": { "type": "string", "enum": ["APPLIED", "SHORTLISTED", "EXAM_QUALIFIED", "TECH_INTERVIEW", "HR_INTERVIEW", "SELECTED", "REJECTED"] },
+        "notes": { "type": "string" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["driveId", "studentId", "status"]
+    },
+    "Announcement": {
+      "title": "Announcement",
+      "description": "College and department notices",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "collegeId": { "type": "string" },
+        "authorName": { "type": "string" },
+        "authorRole": { "type": "string" },
+        "title": { "type": "string" },
+        "content": { "type": "string" },
+        "category": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["title", "content"]
+    },
+    "ChatMessage": {
+      "title": "ChatMessage",
+      "description": "Real-time communication message",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "channelId": { "type": "string" },
+        "senderId": { "type": "string" },
+        "senderName": { "type": "string" },
+        "senderRole": { "type": "string" },
+        "content": { "type": "string" },
+        "attachmentName": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["channelId", "senderId", "content"]
+    },
+    "CareerGuidance": {
+      "title": "CareerGuidance",
+      "description": "AI-generated career recommendations and risk analysis",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "studentId": { "type": "string" },
+        "successScore": { "type": "number" },
+        "riskLevel": { "type": "string" },
+        "recommendations": { "type": "string" },
+        "skillGaps": { "type": "string" },
+        "suggestedRoles": { "type": "string" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["studentId", "successScore", "riskLevel"]
+    }
+  },
+  "firestore": {
+    "/colleges/{collegeId}": {
+      "schema": "College",
+      "description": "Registered colleges"
+    },
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "User profiles and role information"
+    },
+    "/attendance/{attendanceId}": {
+      "schema": "AttendanceRecord",
+      "description": "Student daily and subject attendance"
+    },
+    "/academicRecords/{recordId}": {
+      "schema": "AcademicRecord",
+      "description": "Academic scores, marks, and CGPA records"
+    },
+    "/placementDrives/{driveId}": {
+      "schema": "PlacementDrive",
+      "description": "Campus recruitment company drives"
+    },
+    "/placementApplications/{applicationId}": {
+      "schema": "PlacementApplication",
+      "description": "Student placement applications and recruitment progress"
+    },
+    "/announcements/{announcementId}": {
+      "schema": "Announcement",
+      "description": "College-wide and departmental notices"
+    },
+    "/messages/{messageId}": {
+      "schema": "ChatMessage",
+      "description": "Communication channel messages"
+    },
+    "/careerGuidance/{studentId}": {
+      "schema": "CareerGuidance",
+      "description": "Student AI career advice and readiness assessment"
+    }
+  }
+}

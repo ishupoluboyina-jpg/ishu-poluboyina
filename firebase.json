@@ -1,0 +1,8 @@
+{
+  "firestore": [
+    {
+      "database": "ai-studio-android-careerbr-62d9bcf7-92cc-4550-902a-0139031051ff",
+      "rules": "firestore.rules"
+    }
+  ]
+}
